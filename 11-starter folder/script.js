@@ -74,3 +74,36 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+//// different methode in array
+
+////slice methode
+const arr1 = ['a', 'b', 'c', 'd'];
+const arr2 = ['d', 'e', 'f', 'g'];
+
+console.log(arr1.slice(1));
+console.log(arr1.slice(-2));
+
+///splice methode is the same like slice but different in how it can delete it from orginal array
+console.log(arr1.splice(-2));
+console.log(arr1); /// as you see it delete from the orginol array
+
+////////////////////////////////////////
+//reverse methode
+console.log(arr2.reverse()); /// and this olso can affect the orginal array
+console.log(arr2); //as you see this array also have reversed
+
+////////////////////////////////////////////////////
+//other methode is concat that can merge the two different array
+
+console.log(arr1.concat(arr2));
+
+////////////////////////////////////////////////////////////////////////////////////
+///join Methode this work like in object or on string and its combine arr element in the array
+
+console.log(arr1.concat(arr2).join('----'));
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+///other methode is called indexOf
+
+const arr3 = ['kalisa', 'daniel', 'kalisit', 'karegeya'];
+console.log(arr3.indexOf('kalisit')); /// this can give us index location of this name kalisit
