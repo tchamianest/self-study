@@ -62,34 +62,58 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️reduce methode
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const balance = movements.reduce(function (acc, cur, i, array) {
+//   console.log(`the index ${i} we have ${cur} and sum ${acc}`);
+//   return acc + cur;
+// }, 0);
+// console.log(balance);
+//////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️end of reduce methode
+
 /////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ start real application
+
+// start make movement list--------------------------------------------------
 const displayMovement = function (movement) {
   containerMovements.innerHTML = '';
   movement.forEach((move, i) => {
     const type = move < 0 ? 'withdrawal' : 'deposit';
     const html = `
-     <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
-        <div class="movements__value">${move}</div>
-      </div>
+    <div class="movements__row">
+    <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+    <div class="movements__value">${move}</div>
+    </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 displayMovement(account1.movements);
 
+// End of  make movement list------------------------------------------------------------
+
+//// here we start calcurate the balance of total movement-----------------------------------
+
+const calcdisplaybalanse = function (movemnt) {
+  const calcbalance = movemnt.reduce(function (acc, cur) {
+    return acc + cur;
+  }, 0);
+  labelBalance.innerHTML = '€';
+  labelBalance.insertAdjacentHTML('afterbegin', calcbalance);
+};
+calcdisplaybalanse(account1.movements);
+
+//// here we End  calcurate the balance of total movement-----------------------------
+
 ///////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️filter methode
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-console.log(movements);
-//deporsit filter methode function
-const deposit = movements.filter(mov => mov > 0);
-console.log(`-----------deposit------------`);
-console.log(deposit);
-const withdraw = movements.filter(mov => mov < 0);
-console.log(`---------withdraw--------`);
-console.log(withdraw);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements);
+// //deporsit filter methode function
+// const deposit = movements.filter(mov => mov > 0);
+// console.log(`-----------deposit------------`);
+// console.log(deposit);
+// const withdraw = movements.filter(mov => mov < 0);
+// console.log(`---------withdraw--------`);
+// console.log(withdraw);
 ///////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️End filter methode
 
 ///////////////example of name  transformation
@@ -245,3 +269,11 @@ console.log(withdraw);
 // }
 // console.log(arrw);
 // /////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+////the reduce methode
+const movements = [200, 450, -400, 3000, -650, -130, 12000, 70, 1300];
+const maximum = movements.reduce((acc, cur) => {
+  return cur > acc ? cur : acc;
+}, movements[0]);
+console.log(maximum);
+////end of reduce methode
