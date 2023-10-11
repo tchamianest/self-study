@@ -207,5 +207,15 @@ displayMovement(account1.movements);
 // ////////////////////💥💥💥💥💥💥💥💥💥end of challenge 1
 
 /////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//map methode it can take the present array and then create new one from its with some change
+const movementnew = movements.map(mov => mov * 2);
+console.log(movementnew);
 
+//to make this changes manual
+const arrw = [];
+for (const mov of movements) {
+  arrw.push(mov * 3);
+}
+console.log(arrw);
 /////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
