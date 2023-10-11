@@ -65,45 +65,102 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+/////////////////////////////////////////////////
+// //// different methode in array
+
+// ////slice methode
+// const arr1 = ['a', 'b', 'c', 'd'];
+// const arr2 = ['d', 'e', 'f', 'g'];
+
+// console.log(arr1.slice(1));
+// console.log(arr1.slice(-2));
+
+// ///splice methode is the same like slice but different in how it can delete it from orginal array
+// console.log(arr1.splice(-2));
+// console.log(arr1); /// as you see it delete from the orginol array
+
+// ////////////////////////////////////////
+// //reverse methode
+// console.log(arr2.reverse()); /// and this olso can affect the orginal array
+// console.log(arr2); //as you see this array also have reversed
+
+// ////////////////////////////////////////////////////
+// //other methode is concat that can merge the two different array
+
+// console.log(arr1.concat(arr2));
+
+// ////////////////////////////////////////////////////////////////////////////////////
+// ///join Methode this work like in object or on string and its combine arr element in the array
+
+// console.log(arr1.concat(arr2).join('----'));
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// ///other methode is called indexOf
+
+// const arr3 = ['kalisa', 'daniel', 'kalisit', 'karegeya'];
+// console.log(arr3.indexOf('kalisit')); /// this can give us index location of this name kalisit
+
+/////////////////////////////////////////////////////////////////////////////
+//another methode called at
+
+// const array = [1, 3, 4, 6];
+// console.log(array.at(-1));
+
+//⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+//looop the array with for each
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const mov of movements) {
+//   if (mov > 0) {
+//     console.log(`the money deposit ${mov}`);
+//   } else {
+//     console.log(`the person have debit of ${Math.abs(mov)}`); ///MAth.abs can remove negative sign
+//   }
+// }
+
+//////////////use forEach methode
+// movements.forEach(function (mov, index, array) {
+//   if (mov > 0) {
+//     console.log(`${index + 1}) the money deposit ${mov} from ${array}`);
+//   } else {
+//     console.log(
+//       `${index + 1}) the person have debit of ${Math.abs(mov)} from ${array}`
+//     ); ///MAth.abs can remove negative sign
+//   }
+// });
+
+// ///how its work
+// //0:function(200)
+// //1:function(450)
+// //2:function(-400)....etc
+
+// ///// other methode for use entries to get the index of your array
+
+// for (const [i, ind] of movements.entries()) {
+//   console.log(`${i}: -----${ind}`);
+// }
+
+///the for each in the map and set
+
+///⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ in Map
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+currencies.forEach(function (value, key, map) {
+  console.log(`${key} :${value}`);
+});
 
-/////////////////////////////////////////////////
-//// different methode in array
+///⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ in set
 
-////slice methode
-const arr1 = ['a', 'b', 'c', 'd'];
-const arr2 = ['d', 'e', 'f', 'g'];
+const sets = new Set(['USD', 'EUR', 'USD', 'RWF']);
+console.log(sets);
 
-console.log(arr1.slice(1));
-console.log(arr1.slice(-2));
-
-///splice methode is the same like slice but different in how it can delete it from orginal array
-console.log(arr1.splice(-2));
-console.log(arr1); /// as you see it delete from the orginol array
-
-////////////////////////////////////////
-//reverse methode
-console.log(arr2.reverse()); /// and this olso can affect the orginal array
-console.log(arr2); //as you see this array also have reversed
-
-////////////////////////////////////////////////////
-//other methode is concat that can merge the two different array
-
-console.log(arr1.concat(arr2));
-
-////////////////////////////////////////////////////////////////////////////////////
-///join Methode this work like in object or on string and its combine arr element in the array
-
-console.log(arr1.concat(arr2).join('----'));
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-///other methode is called indexOf
-
-const arr3 = ['kalisa', 'daniel', 'kalisit', 'karegeya'];
-console.log(arr3.indexOf('kalisit')); /// this can give us index location of this name kalisit
+sets.forEach(function (value) {
+  console.log(value);
+});
