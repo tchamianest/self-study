@@ -61,6 +61,28 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ start real application
+const displayMovement = function (movement) {
+  containerMovements.innerHTML = '';
+  movement.forEach((move, i) => {
+    const type = move < 0 ? 'withdrawal' : 'deposit';
+    const html = `
+     <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${move}</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovement(account1.movements);
+
+/////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ end of real application
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -111,7 +133,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 //looop the array with for each
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // for (const mov of movements) {
 //   if (mov > 0) {
@@ -146,21 +168,44 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 ///the for each in the map and set
 
 ///⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ in Map
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-currencies.forEach(function (value, key, map) {
-  console.log(`${key} :${value}`);
-});
+// currencies.forEach(function (value, key, map) {
+//   console.log(`${key} :${value}`);
+// });
 
-///⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ in set
+// ///⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ in set
 
-const sets = new Set(['USD', 'EUR', 'USD', 'RWF']);
-console.log(sets);
+// const sets = new Set(['USD', 'EUR', 'USD', 'RWF']);
+// console.log(sets);
 
-sets.forEach(function (value) {
-  console.log(value);
-});
+// sets.forEach(function (value) {
+//   console.log(value);
+// });
+
+////////////////////💥💥💥💥💥💥💥💥💥starting challenge1
+// const juliedata = [3, 5, 2, 12, 7];
+// const Katedata = [4, 1, 15, 8, 3];
+
+// const checkDogs = function (arr1, arr2) {
+//   const arr11 = arr1.slice(1, -2);
+
+//   const arrayboth = arr11.concat(arr2);
+//   arrayboth.forEach(function (mov, i) {
+//     if (mov > 3) {
+//       console.log(`dog ${i + 1} is adult its ${mov} Years old`);
+//     } else {
+//       console.log(`dog ${i + 1} is puppy ${mov} Years olds`);
+//     }
+//   });
+// };
+// checkDogs(juliedata, Katedata);
+// ////////////////////💥💥💥💥💥💥💥💥💥end of challenge 1
+
+/////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+/////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
