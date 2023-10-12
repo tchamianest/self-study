@@ -81,7 +81,7 @@ const displayMovement = function (movement) {
     const html = `
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-    <div class="movements__value">${move}</div>
+    <div class="movements__value">${move}€</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -91,6 +91,27 @@ displayMovement(account1.movements);
 
 // End of  make movement list------------------------------------------------------------
 
+///start calcurate movement summary----------------
+const movementsummary = function (movement) {
+  const income = movement
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumIn.innerHTML = `${income}€`;
+
+  const outcome = movement
+    .filter(mov => mov < 0)
+    .reduce((arr, cur) => arr + cur, 0);
+  labelSumOut.textContent = `${Math.abs(outcome)}€`;
+
+  const interest = movement
+    .filter(mov => mov > 0)
+    .map(withdraw => (withdraw * 1.2) / 100)
+    .filter((cur, i, Arr) => cur >= 1)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${Math.abs(interest)}€`;
+};
+movementsummary(account1.movements);
+///start calcurate movement summary-----------------
 //// here we start calcurate the balance of total movement-----------------------------------
 
 const calcdisplaybalanse = function (movemnt) {
@@ -101,6 +122,32 @@ const calcdisplaybalanse = function (movemnt) {
   labelBalance.insertAdjacentHTML('afterbegin', calcbalance);
 };
 calcdisplaybalanse(account1.movements);
+
+///////// user name
+const user = accs => {
+  accs.forEach(fullname => {
+    fullname.username = fullname.owner
+      .toLowerCase()
+      .split(' ')
+      .map(nam => nam[0])
+      .join('');
+  });
+};
+user(accounts);
+// console.log(account2.username);
+//// end of user name
+
+////Login------------------------------------------
+
+let currentaccount;
+btnLogin.addEventListener('click', function (event) {
+  event.preventDefault();
+  currentaccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentaccount);
+});
+////End of Login------------------------------------------
 
 //// here we End  calcurate the balance of total movement-----------------------------
 
@@ -271,9 +318,66 @@ calcdisplaybalanse(account1.movements);
 // /////////////////////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Map Methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 ////the reduce methode
-const movements = [200, 450, -400, 3000, -650, -130, 12000, 70, 1300];
-const maximum = movements.reduce((acc, cur) => {
-  return cur > acc ? cur : acc;
-}, movements[0]);
-console.log(maximum);
+// const movements = [200, 450, -400, 3000, -650, -130, 12000, 70, 1300];
+// const maximum = movements.reduce((acc, cur) => {
+//   return cur > acc ? cur : acc;
+// }, movements[0]);
+// console.log(maximum);
 ////end of reduce methode
+
+////////////////////////////challlenge number 2
+// const juliedata = [5, 2, 4, 1, 15, 8, 3];
+// const Katedata = [16, 6, 10, 5, 6, 1, 4];
+
+// const checkDogs = function (arr1, arr2) {
+//   const arr11 = arr1.slice(1, -2);
+
+//   const arrayboth = arr11.concat(arr2);
+// arrayboth.forEach(function (mov, i) {
+//   if (mov > 3) {
+//     console.log(`dog ${i + 1} is adult its ${mov} Years old`);
+//   } else {
+//     console.log(`dog ${i + 1} is puppy ${mov} Years olds`);
+//   }
+// });
+//   console.log(arrayboth);
+//   const humage = arrayboth.reduce(function (acc, cur, i, e) {
+//     const human = cur > 2 ? 16 + cur * 4 : 16 * cur;
+//     console.log(`dog age ${cur} in human ${human}`);
+//     if (human >= 18) {
+//       console.log(`Total age ${acc}`);
+//       return acc + human;
+//     } else {
+//       return continue;
+//     }
+//   }, 0);
+//   console.log(
+//     `the average age of that human is${humage / (arrayboth.length + 1)}`
+//   );
+// };
+// checkDogs(juliedata, Katedata);
+////////////////////////////End of challlenge number 2
+
+//////🚗🚗🚗🚗🚗🚗Magics chaining🚗🚗🚗🚗🚗🚗🚗//// is to combine different methode in one line
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eur = 1.1;
+// // const display = movements
+// //   .filter(mov => mov > 0)
+// //   .map(mov => mov * eur)
+// //   .reduce((acc, cur) => acc + cur, 0);
+// // console.log(Math.trunc(display));
+// //////🚗🚗🚗🚗🚗🚗End ofMagics chaining🚗🚗🚗🚗🚗🚗🚗
+// const check = movements.map((mov, i, cs) => {
+//   console.log(mov);
+//   return mov;
+// });
+// console.log(check);
+
+///dilling with find methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const firstnegative = movements.find(mov => mov < 0);
+// console.log(firstnegative);
+// console.log(accounts);
+// const findde = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(findde);
+///end of  find methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️end
