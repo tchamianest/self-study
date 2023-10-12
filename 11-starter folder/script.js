@@ -400,3 +400,14 @@ btnLogin.addEventListener('click', function (event) {
 // const findde = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(findde);
 ///end of  find methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️end
+
+///////////////////////////////////////////////////////////////////////
+
+const namea = 'kalisa daniel';
+const onene = zin => {
+  return zin
+    .split(' ')
+    .map(ka => ka[0])
+    .join('');
+};
+console.log(onene(account2.owner));
