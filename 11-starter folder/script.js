@@ -92,25 +92,25 @@ displayMovement(account1.movements);
 // End of  make movement list------------------------------------------------------------
 
 ///start calcurate movement summary----------------
-const movementsummary = function (movement) {
-  const income = movement
+const movementsummary = function (arr) {
+  const income = arr.movements
     .filter(mov => mov > 0)
     .reduce((acc, cur) => acc + cur, 0);
   labelSumIn.innerHTML = `${income}€`;
 
-  const outcome = movement
+  const outcome = arr.movements
     .filter(mov => mov < 0)
     .reduce((arr, cur) => arr + cur, 0);
   labelSumOut.textContent = `${Math.abs(outcome)}€`;
 
-  const interest = movement
+  const interest = arr.movements
     .filter(mov => mov > 0)
-    .map(withdraw => (withdraw * 1.2) / 100)
+    .map(withdraw => (withdraw * arr.interestRate) / 100)
     .filter((cur, i, Arr) => cur >= 1)
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${Math.abs(interest)}€`;
 };
-movementsummary(account1.movements);
+// movementsummary(account1.movements);
 ///start calcurate movement summary-----------------
 //// here we start calcurate the balance of total movement-----------------------------------
 
@@ -145,7 +145,26 @@ btnLogin.addEventListener('click', function (event) {
   currentaccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentaccount);
+  // console.log(currentaccount);
+  if (currentaccount?.pin === Number(inputLoginPin.value)) {
+    containerApp.style.opacity = 100;
+    labelWelcome.style.color = 'black';
+    labelWelcome.innerHTML = `Welcome ${currentaccount.owner.split(' ')[0]}`;
+
+    //clear input
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    // movement
+    movementsummary(currentaccount);
+    //display all
+    displayMovement(currentaccount.movements);
+    ///calc display
+    calcdisplaybalanse(currentaccount.movements);
+  } else {
+    containerApp.style.opacity = 0;
+    labelWelcome.innerHTML = `Enter the proper data`;
+    labelWelcome.style.color = 'red';
+  }
 });
 ////End of Login------------------------------------------
 
