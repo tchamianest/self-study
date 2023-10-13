@@ -74,9 +74,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ start real application
 
 // start make movement list--------------------------------------------------
-const displayMovement = function (movement) {
+const displayMovement = function (acc) {
   containerMovements.innerHTML = '';
-  movement.forEach((move, i) => {
+  acc.movements.forEach((move, i) => {
     const type = move < 0 ? 'withdrawal' : 'deposit';
     const html = `
     <div class="movements__row">
@@ -87,7 +87,7 @@ const displayMovement = function (movement) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovement(account1.movements);
+// displayMovement(account1.movements);
 
 // End of  make movement list------------------------------------------------------------
 
@@ -114,14 +114,14 @@ const movementsummary = function (arr) {
 ///start calcurate movement summary-----------------
 //// here we start calcurate the balance of total movement-----------------------------------
 
-const calcdisplaybalanse = function (movemnt) {
-  const calcbalance = movemnt.reduce(function (acc, cur) {
+const calcdisplaybalanse = function (acc) {
+  acc.balance = acc.movements.reduce(function (acc, cur) {
     return acc + cur;
   }, 0);
   labelBalance.innerHTML = '€';
-  labelBalance.insertAdjacentHTML('afterbegin', calcbalance);
+  labelBalance.insertAdjacentHTML('afterbegin', acc.balance);
 };
-calcdisplaybalanse(account1.movements);
+// calcdisplaybalanse(account1.movements);
 
 ///////// user name
 const user = accs => {
@@ -138,6 +138,14 @@ user(accounts);
 //// end of user name
 
 ////Login------------------------------------------
+//update user interface code-------------
+const updateui = function (acc) {
+  movementsummary(acc);
+  //display all
+  displayMovement(acc);
+  ///calc display
+  calcdisplaybalanse(acc);
+};
 
 let currentaccount;
 btnLogin.addEventListener('click', function (event) {
@@ -155,11 +163,7 @@ btnLogin.addEventListener('click', function (event) {
     inputLoginUsername.value = inputLoginPin.value = '';
 
     // movement
-    movementsummary(currentaccount);
-    //display all
-    displayMovement(currentaccount.movements);
-    ///calc display
-    calcdisplaybalanse(currentaccount.movements);
+    updateui(currentaccount);
   } else {
     containerApp.style.opacity = 0;
     labelWelcome.innerHTML = `Enter the proper data`;
@@ -167,6 +171,28 @@ btnLogin.addEventListener('click', function (event) {
   }
 });
 ////End of Login------------------------------------------
+
+//// Transfer money and receive------------------------------------------
+btnTransfer.addEventListener('click', function (event) {
+  event.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receivingacc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    receivingacc &&
+    receivingacc.username !== currentaccount.username &&
+    currentaccount.balance >= amount
+  ) {
+    console.log(receivingacc.movements);
+    receivingacc.movements.push(amount);
+    currentaccount.movements.push(-amount);
+    updateui(currentaccount);
+  }
+});
+////End of Transfer and receive------------------------------------------
 
 //// here we End  calcurate the balance of total movement-----------------------------
 
