@@ -520,7 +520,7 @@ btnLoan.addEventListener('click', function (event) {
 // //////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of flater flaterMap methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 ////////////////////////////// sorting methode
-const neww = [1, 2, -4, 9, -29, -1];
+// const neww = [1, 2, -4, 9, -29, -1];
 // console.log(
 //   neww.sort((a, b) => {
 //     if (a > b) return 1;
@@ -532,3 +532,22 @@ const neww = [1, 2, -4, 9, -29, -1];
 // const solve = neww.sort((a, b) => b - a); //modern way of sorting
 // console.log(solve);
 //////////////////////////////End of  sorting methode
+
+////💥💥💥💥💥💥💥💥new way to create array💥💥💥💥💥💥
+const arr = [1, 1, 2, 3, 4, 5, 3, 34, 2];
+const x = new Array(7); //this can return theempty arrat with seven empty space
+console.log(x);
+x.fill(1, 2, -1); // fill one in index2 to length-1
+console.log(x);
+
+///new way
+
+const y = Array.from({ length: 8 }, () => 1);
+console.log(y);
+
+/////magic exercise
+const z = Array.from({ length: 100 }, (cue, i) =>
+  Math.trunc(Math.random() * 100 + 1)
+);
+console.log(z);
+////💥💥💥💥💥💥💥💥End ofnew way to create array💥💥💥💥💥💥
