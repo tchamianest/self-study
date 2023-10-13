@@ -75,9 +75,12 @@ const roantext = document.querySelector('.roan-rew');
 /////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ start real application
 
 // start make movement list--------------------------------------------------
-const displayMovement = function (acc) {
+const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = '';
-  acc.movements.forEach((move, i) => {
+  const mov = sort
+    ? acc.movements.sort((a, b) => a - b)
+    : acc.movements.sort((a, b) => b - a);
+  mov.forEach((move, i) => {
     const type = move < 0 ? 'withdrawal' : 'deposit';
     const html = `
     <div class="movements__row">
@@ -89,6 +92,12 @@ const displayMovement = function (acc) {
   });
 };
 // displayMovement(account1.movements);
+let sorts = false;
+btnSort.addEventListener('click', function (event) {
+  event.preventDefault();
+  displayMovement(currentaccount, !sorts); // this allow us to looop over sorting
+  sorts = !sorts;
+});
 
 // End of  make movement list------------------------------------------------------------
 
@@ -225,11 +234,11 @@ btnLoan.addEventListener('click', function (event) {
   if (moc > 0 && currentaccount.movements.some(acc => acc > moc + moc * 0.1)) {
     currentaccount.movements.push(moc);
     updateui(currentaccount);
-    inputLoanAmount.value = ' ';
+    inputLoanAmount.value = '';
     roantext.innerHTML = 'Request loan';
     roantext.style.color = 'black';
   } else {
-    inputLoanAmount.value = ' ';
+    inputLoanAmount.value = '';
     roantext.innerHTML = 'Enter possible amount';
     roantext.style.color = 'red';
   }
@@ -490,3 +499,36 @@ btnLoan.addEventListener('click', function (event) {
 // console.log(anything);
 /////////////////////end some-----------------
 //////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of some and every methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+//////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of flater methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+// const arrs = [[1, 2, 3], [5, 6, 7], 5, 6];
+// console.log(arrs.flat());
+// const arrs2 = [[1, [2, 3]], [5, [6, 7]], 5, 6]; // show flater with index specify the number of remover make
+// console.log(arrs2.flat(2));
+
+//example from accounts
+// const allmov = accounts.map(acc => acc.movements);
+// const sum = allmov.flat(1).reduce((acc, cur) => acc + cur, 0);
+// console.log(allmov.flat());
+// console.log(sum);
+
+// //// by using flatmap it like map but wi flat all we have
+// const sumw = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, cur) => acc + cur, 0);
+// console.log(sumw);
+// //////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of flater flaterMap methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+////////////////////////////// sorting methode
+const neww = [1, 2, -4, 9, -29, -1];
+// console.log(
+//   neww.sort((a, b) => {
+//     if (a > b) return 1;
+//     if (b > a) return -1;
+//   })
+// );
+
+//how we can sort in morden way
+// const solve = neww.sort((a, b) => b - a); //modern way of sorting
+// console.log(solve);
+//////////////////////////////End of  sorting methode
