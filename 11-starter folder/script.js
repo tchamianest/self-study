@@ -60,6 +60,7 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+const roantext = document.querySelector('.roan-rew');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️reduce methode
@@ -179,7 +180,6 @@ btnTransfer.addEventListener('click', function (event) {
   const receivingacc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
-  inputTransferAmount.value = inputTransferTo.value = '';
   if (
     amount > 0 &&
     receivingacc &&
@@ -191,8 +191,50 @@ btnTransfer.addEventListener('click', function (event) {
     currentaccount.movements.push(-amount);
     updateui(currentaccount);
   }
+  inputTransferAmount.value = inputTransferTo.value = '';
 });
 ////End of Transfer and receive------------------------------------------
+
+///start of closing account button---------------------
+btnClose.addEventListener('click', function (event) {
+  event.preventDefault();
+  const inputuserclos = inputCloseUsername.value;
+  const inputpinclose = Number(inputClosePin.value);
+  if (
+    currentaccount.username === inputuserclos &&
+    currentaccount.pin === inputpinclose
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentaccount.username
+    );
+
+    accounts.splice(index, 1); // delete accounts on that index
+
+    setTimeout(function () {
+      containerApp.style.opacity = 0;
+    }, 1000);
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+///End  of closing account button---------------------
+
+////////////requesting loan btn---------------------------
+btnLoan.addEventListener('click', function (event) {
+  event.preventDefault();
+  const moc = Number(inputLoanAmount.value);
+  if (moc > 0 && currentaccount.movements.some(acc => acc > moc + moc * 0.1)) {
+    currentaccount.movements.push(moc);
+    updateui(currentaccount);
+    inputLoanAmount.value = ' ';
+    roantext.innerHTML = 'Request loan';
+    roantext.style.color = 'black';
+  } else {
+    inputLoanAmount.value = ' ';
+    roantext.innerHTML = 'Enter possible amount';
+    roantext.style.color = 'red';
+  }
+});
+////////////End of requesting loan btn---------------------------
 
 //// here we End  calcurate the balance of total movement-----------------------------
 
@@ -429,11 +471,22 @@ btnTransfer.addEventListener('click', function (event) {
 
 ///////////////////////////////////////////////////////////////////////
 
-const namea = 'kalisa daniel';
-const onene = zin => {
-  return zin
-    .split(' ')
-    .map(ka => ka[0])
-    .join('');
-};
-console.log(onene(account2.owner));
+// const namea = 'kalisa daniel';
+// const onene = zin => {
+//   return zin
+//     .split(' ')
+//     .map(ka => ka[0])
+//     .join('');
+// };
+// console.log(onene(account2.owner));
+
+//////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️some and every methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const check = movements.includes(450); //you can use this for when you know exactry what you want
+
+// console.log(check);
+// /////////////////////somemethod-----------------
+// const anything = movements.some(acc => acc > 0);//all is the checking meathode
+// console.log(anything);
+/////////////////////end some-----------------
+//////////////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of some and every methode⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
