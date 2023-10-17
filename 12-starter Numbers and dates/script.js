@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,19 +104,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -162,7 +162,7 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and message
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -252,14 +252,27 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES 11 numbers and dates
 
-//// converting string iinto anumber in javascript
+// //// converting string iinto anumber in javascript
 
-console.log(+'32');
+// console.log(+'32');
 
-///// javascript error
+// ///// javascript error
 
-console.log(0.1 + 0.2 === 0.3); // this return false but it is true
-console.log(Number.parseFloat('6.867gsfd')); //this can display all number with decimal
-console.log(Number.parseInt('6.867gsfd')); // this display interge number without decimal
+// console.log(0.1 + 0.2 === 0.3); // this return false but it is true
+// console.log(Number.parseFloat('6.867gsfd')); //this can display all number with decimal
+// console.log(Number.parseInt('6.867gsfd')); // this display interge number without decimal
 
-console.log(Number.parseFloat('2hs', 10)); //this 10 mean the base
+// console.log(Number.parseFloat('2hs', 10)); //this 10 mean the base
+
+// //////////////////////// create random value between two numbers
+// const random = (max, min) => {
+//   return Math.floor(Math.random() * (max - min) + 1) + min; //floor is better than trunc because work with positive and negative
+// };
+// console.log(random(20, 9));
+// //////////////////////// end of create random value between two numbers
+
+///////////////numerical separators
+
+const number = 290_454_763;
+console.log(number);
+///////////////numerical separators
