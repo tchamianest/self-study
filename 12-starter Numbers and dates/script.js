@@ -273,6 +273,18 @@ btnSort.addEventListener('click', function (e) {
 
 ///////////////numerical separators
 
-const number = 290_454_763;
+const number = 290_454_763; //this javascript read it as anumber
 console.log(number);
+console.log(2 ** 510 - 1);
 ///////////////numerical separators
+
+///// creating dates
+const today = new Date();
+console.log(today); //this display to day dates
+// other example
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // three days rater converted into milsecond
+
+console.log(account1.movementsDates[1]);
+
+///// creating dates
