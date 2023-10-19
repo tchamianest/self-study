@@ -459,3 +459,19 @@ updateTime();
 
 const intervalId = setInterval(updateTime, 1000); //for update our function every second
 // //////////////////////⌚⌚⌚⌚⌚⌚⌚⌚⌚real time
+
+let time = 110;
+
+const func = function () {
+  const dispaly = function () {
+    const minuter = Math.trunc(time / 60);
+    const second = Math.trunc(time % 60);
+
+    time--;
+    document.body.innerHTML = `${minuter}:${second}`;
+  };
+  dispaly();
+  const kalisa = setInterval(dispaly, 1000);
+};
+
+func();
