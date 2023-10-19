@@ -192,9 +192,34 @@ const updateUI = function (acc) {
 // const locate = navigator.language;
 // labelDate.textContent = new Intl.DateTimeFormat(locate, option).format(now);
 
+///// timer loged out function
+
+const timerLogout = function () {
+  //set time to five minute
+  let time = 300;
+  ///update every second time left
+  const functime = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const second = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${second}`;
+    ///call the timer every second
+    /// for time equal to 0 we need to logout
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'You have to login Again!⌚';
+      containerApp.style.opacity = 0;
+    }
+    time--; //we put it under in order to get out if we reach zero exactly
+  };
+  functime();
+  const timer = setInterval(functime, 1000);
+  return timer;
+
+  ///loged out if time reached
+};
 //experience the the dat eformating
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 /// fake login
 
 // currentAccount = account1;
@@ -240,6 +265,9 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+    // set time out
+    if (timer) clearInterval(timer); // this line is for each time user change the timer stop and start again
+    timer = timerLogout();
 
     // Update UI
     updateUI(currentAccount);
@@ -267,6 +295,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // set new timer becouse activity happen
+    clearInterval(timer); // this line is for each time user change the timer stop and start again
+    timer = timerLogout();
   }
 });
 
@@ -284,6 +316,10 @@ btnLoan.addEventListener('click', function (e) {
       // Update UI
       updateUI(currentAccount);
     }, 5000);
+
+    // set new timer becouse activity happen
+    clearInterval(timer); // this line is for each time user change the timer stop and start again
+    timer = timerLogout();
   }
   inputLoanAmount.value = '';
 });
