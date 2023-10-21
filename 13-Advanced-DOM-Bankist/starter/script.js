@@ -72,9 +72,9 @@ document.addEventListener('keydown', function (e) {
 //   .addEventListener('click', function () {
 //     message.remove();
 
-    //or other methode
-    // message.parentElement.removeChild(message);
-  });
+//or other methode
+// message.parentElement.removeChild(message);
+// });
 
 /// starting the style
 // let change our cookie background
@@ -102,6 +102,62 @@ document.addEventListener('keydown', function (e) {
 
 // //how
 
-
-
 /////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️start working on real App⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+//////  1st implement smothly scrolling
+const btnScroll = document.querySelector('.btn--scroll-to');
+const section1 = document.getElementById('section--1');
+
+btnScroll.addEventListener('click', function (e) {
+  const scolbou = section1.getBoundingClientRect(); // show its location
+  console.log(scolbou);
+
+  //simple way for getting some cordinate
+
+  console.log(
+    'Height/width view',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  /// scrolling we use window scroll methode
+
+  // window.scroll(scolbou.right, scolbou.bottom); // seting the position for where we need to scroll
+
+  // window.scroll(scolbou.left, scolbou.top); //this have some bug error and we need to add the current position height
+
+  // window.scrollTo(
+  //   scolbou.left + window.pageXOffset,
+  //   scolbou.top + window.pageYOffset
+  // );
+
+  // to  make it smothly we  can call its using the object
+
+  // window.scrollTo({
+  //   left: scolbou.left + window.pageXOffset,
+  //   top: scolbou.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Modern way for scroll
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+////⚠️⚠️⚠️⚠️⚠️⚠️⚠️Types of Events and Event Handle⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+//mouseenter which work like hover
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('mouseenter', function () {
+  //hovering event
+  alert('ok you made it you hover on h1 already');
+});
+
+/// another way for undestund the event that happen
+
+h1.onmouseenter = function (e) {
+  alert('iyi ni leastener ya 2');
+};
+
+////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Types of Events and Event Handle⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
