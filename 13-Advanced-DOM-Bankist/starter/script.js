@@ -149,15 +149,25 @@ btnScroll.addEventListener('click', function (e) {
 //mouseenter which work like hover
 const h1 = document.querySelector('h1');
 
-h1.addEventListener('mouseenter', function () {
-  //hovering event
+// h1.addEventListener('mouseenter', function () {
+//   //hovering event modern way
+//   alert('ok you made it you hover on h1 already');
+// });
+
+// /// another way for undestund the event that happen
+
+// h1.onmouseenter = function (e) {
+//   /// another way for event listener but is oldschool
+//   alert('iyi ni leastener ya 2');
+// };
+
+// another way
+const alret1 = function () {
+  //hovering event modern way
   alert('ok you made it you hover on h1 already');
-});
 
-/// another way for undestund the event that happen
-
-h1.onmouseenter = function (e) {
-  alert('iyi ni leastener ya 2');
+  /////💀💀💀💀to remove this event
+  h1.removeEventListener('mouseenter', alret1);
 };
-
+h1.addEventListener('mouseenter', alret1);
 ////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Types of Events and Event Handle⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
