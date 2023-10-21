@@ -49,31 +49,59 @@ document.addEventListener('keydown', function (e) {
 
 // .insertAdjacentHTML     // best methode for inserting and creating html
 
-const message = document.createElement('div');
-message.classList.add('cookie-message');
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
 
-// console.log(message);
-const head = document.querySelector('.header');
-message.innerHTML = `We are the Kalisas and we need to build and analitics
-<button class='btn btn--close--cookie'>the kalisas</button>`;
+// // console.log(message);
+// const head = document.querySelector('.header');
+// message.innerHTML = `We are the Kalisas and we need to build and analitics
+// <button class='btn btn--close--cookie'>the kalisas</button>`;
 
-// head.prepend(message); // prepending add element as the first child of header element
-// // head.append(message); // this can move element to last position of headeer
-// head.append(message.cloneNode(true)); // this can create the new copy
+// // head.prepend(message); // prepending add element as the first child of header element
+// // // head.append(message); // this can move element to last position of headeer
+// // head.append(message.cloneNode(true)); // this can create the new copy
 
-// head.before(message); //this insert before the header section
-// head.after(message.cloneNode(true)); //this insert after the header section and create copy becouse cloneNode(true)
-head.after(message);
+// // head.before(message); //this insert before the header section
+// // head.after(message.cloneNode(true)); //this insert after the header section and create copy becouse cloneNode(true)
+// head.after(message);
 
-// ///✅✅✅✅✅✅✅✅✅✅Deleting the  eleement✅✅✅✅✅✅✅✅✅✅✅
+// // ///✅✅✅✅✅✅✅✅✅✅Deleting the  eleement✅✅✅✅✅✅✅✅✅✅✅
 
-document
-  .querySelector('.btn--close--cookie')
-  .addEventListener('click', function () {
-    message.remove();
+// document
+//   .querySelector('.btn--close--cookie')
+//   .addEventListener('click', function () {
+//     message.remove();
 
     //or other methode
     // message.parentElement.removeChild(message);
   });
 
 /// starting the style
+// let change our cookie background
+
+// message.style.background = '#37383d'; // this is the inline  style and we can show it inhtml document
+// console.log(getComputedStyle(message).color); // this the methode for showing the styles
+// console.log(getComputedStyle(message).height); // this the methode for showing the styles
+
+// const newstyle = Number.parseFloat(getComputedStyle(message).height) + 40;
+// message.style.height = `${String(newstyle)}px`;
+
+// // ///✅✅✅✅✅✅✅✅✅✅styling✅✅✅✅✅✅✅✅✅✅✅
+
+// // document.documentElement.style.setProperty('--color-primary', 'blue'); //this change any where in app we use the variable of primary
+
+// /////////////attribute
+
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.src);
+// console.log(logo.alt);
+// console.log(logo.className);
+
+// ///// non standard  attributes: is the attribute you create which are not stand for html
+// console.log(logo.desiner); // this dosen't work because it is not standard
+
+// //how
+
+
+
+/////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️start working on real App⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
