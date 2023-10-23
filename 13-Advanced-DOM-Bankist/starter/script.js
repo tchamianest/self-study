@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScroll = document.querySelector('.btn--scroll-to');
+const section1 = document.getElementById('section--1');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -105,8 +107,6 @@ document.addEventListener('keydown', function (e) {
 /////⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️start working on real App⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 //////  1st implement smothly scrolling
-const btnScroll = document.querySelector('.btn--scroll-to');
-const section1 = document.getElementById('section--1');
 
 btnScroll.addEventListener('click', function (e) {
   const scolbou = section1.getBoundingClientRect(); // show its location
@@ -144,6 +144,15 @@ btnScroll.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+///💥💥💥💥💥💥page delegation 💥💥💥💥💥💥💥💥
+document.querySelector('.nav__link').forEach(function (el) {
+  el.addEventListener(function (e) {
+    console.log('links');
+  });
+});
+
+///💥💥💥💥💥💥page delegation 💥💥💥💥💥💥💥💥
+
 ////⚠️⚠️⚠️⚠️⚠️⚠️⚠️Types of Events and Event Handle⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 //mouseenter which work like hover
@@ -172,7 +181,39 @@ const h1 = document.querySelector('h1');
 // h1.addEventListener('mouseenter', alret1);
 // ////⚠️⚠️⚠️⚠️⚠️⚠️⚠️End of Types of Events and Event Handle⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
-const mov = [100, 200, 4999, 9890];
-for (const a of mov.entries()) {
-  console.log(a);
-}
+////////////////////////////////// event propagation practices
+//rgb(255,255,255)
+
+////💥💥💥💥💥how we can handle different event at the same time💥💥💥💥💥💥💥
+// const randomint = (min, max) => {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// };
+
+// const randomcolor = () => {
+//   return `rgb(${randomint(0, 255)},${randomint(0, 255)},${randomint(0, 255)})`;
+// };
+
+// document.querySelector('.nav__link ').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomcolor();
+//   console.log('Feature btn', e.target);
+// });
+
+// document.querySelector('.nav__links ').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomcolor();
+//   console.log('all-container', e.target);
+// });
+
+// document.querySelector('.nav ').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomcolor();
+//     console.log('Container', e.target);
+
+//     // to stop the propagation at this button
+//     // e.stopPropagation(); //but it is not good practise
+//   },
+//   true // other way for bubling capturing
+// );
+// document.querySelector('body').style.backgroundColor = randomcolor(); // idont knnow reson why my computer doent ready this rgbb
+
+/// 💀💀💀💀💀event delegation implementing page navigation💀💀💀💀💀💀💀💀
