@@ -36,6 +36,34 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Lazy image↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+
+const imgtarget = document.querySelectorAll('img[data-src]');
+// console.log(imgtarget);
+const loadimg = function (entries, observe) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+
+  /// remove lazy blur if all image are fineshed to load
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observe.unobserve(entry.target);
+};
+
+const imgobserve = new IntersectionObserver(loadimg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px',
+});
+imgtarget.forEach(img => imgobserve.observe(img));
+
+/////↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Lazy image end sectioon↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Implement stick navigation↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
@@ -45,6 +73,24 @@ window.addEventListener('scroll', function () {
   if (window.scrollY > boundary.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 });
+
+//// the new better way for implementing it by using intersectio api
+
+//start for learning how its work with api
+const observecallback = function (entry, observe) {
+  entry.forEach(enter => {
+    // console.log(enter);
+  });
+};
+
+const obseroption = {
+  root: null,
+  threshold: 0.1,
+};
+
+const observe = new IntersectionObserver(observecallback, obseroption);
+observe.observe(section1);
+
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️End of Implement stick navigation↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
