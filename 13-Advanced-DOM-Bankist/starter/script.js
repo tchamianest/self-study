@@ -35,7 +35,43 @@ document.addEventListener('keydown', function (e) {
 });
 
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Tabbed component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+const tabs = document.querySelectorAll('.operations__tab');
+const tabscontainer = document.querySelector('.operations__tab-container');
+const contenr = document.querySelectorAll('.operations__content');
 
+//this is to select each tab that we click
+// tabs.forEach(tab =>
+//   tab.addEventListener('click', function () {
+//     console.log('ukanze tab');
+//   })
+// );
+
+// other methode for identifie the button that we click
+
+tabscontainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab'); // we get the all operation tab if we click it
+
+  //remove null problemm for clik outside
+
+  if (!clicked) return; //this if happen we can do nothing this remove the error of non clik
+
+  console.log(clicked);
+  //before add operation tab active we have to remove from others
+  tabs.forEach(a => a.classList.remove('operations__tab--active'));
+
+  clicked.classList.add('operations__tab--active');
+
+  // activate the content area
+  console.log(clicked.dataset.tab);
+
+  // we have to hidden other and then display other
+  contenr.forEach(e => e.classList.remove('operations__content--active'));
+
+  //display based on waht we click
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️End of Tabbed component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
 
 ////// other new methode for selcting✅✅✅✅Selecting Methode✅✅✅✅
