@@ -34,6 +34,10 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Tabbed component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+
+///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️End of Tabbed component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+
 ////// other new methode for selcting✅✅✅✅Selecting Methode✅✅✅✅
 
 // console.log(document.documentElement); // this can be used to select all Entire pages
@@ -145,8 +149,8 @@ btnScroll.addEventListener('click', function (e) {
 });
 
 ///💥💥💥💥💥💥page delegation 💥💥💥💥💥💥💥💥
-document.querySelector('.nav__link').forEach(function (el) {
-  el.addEventListener(function (e) {
+document.querySelectorAll('.nav__link').forEach(function (el) {
+  el.addEventListener('click', function (e) {
     console.log('links');
   });
 });
@@ -217,3 +221,19 @@ const h1 = document.querySelector('h1');
 // document.querySelector('body').style.backgroundColor = randomcolor(); // idont knnow reson why my computer doent ready this rgbb
 
 /// 💀💀💀💀💀event delegation implementing page navigation💀💀💀💀💀💀💀💀
+
+//⚠️⚠️⚠️⚠️⚠️DOM transversing⚠️⚠️⚠️⚠️⚠️
+
+// // const h1 = document.querySelector('h1');
+// console.log(h1.querySelectorAll('.highlight'));
+// h1.firstElementChild.style.color = 'blue'; // this can change only the color for first child element only
+// h1.lastElementChild.style.color = 'white'; // this can change only the color for last child element only
+
+// /// going upward in the parent
+// console.log(h1.parentNode);
+// h1.closest('.header').style.background = 'var(--gradient-secondary)'; // this code can change all the entire header background color
+
+// // going up: siblings
+
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
