@@ -46,6 +46,21 @@ const btnsliderright = document.querySelector('.slider__btn--right');
 let currentslide = 0;
 const maxslide = slides.length;
 
+/// init the dot
+
+const dotcontainer = document.querySelector('.dots');
+
+//function for creating the dots
+
+const createDots = function () {
+  slides.forEach(function (_, i) {
+    dotcontainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+createDots();
 // slider.style.transform = `scale(0.7)`;
 // slider.style.overflow = `visible`;
 
@@ -79,6 +94,16 @@ const prevefunction = function () {
 };
 btnsliderright.addEventListener('click', nextslide);
 btnsliderleft.addEventListener('click', prevefunction);
+
+/// adding slider with allow button
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight') {
+    nextslide();
+  } else if (e.key === 'ArrowLeft') {
+    prevefunction();
+  }
+});
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Building slider component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
