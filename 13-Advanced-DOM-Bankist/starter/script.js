@@ -38,6 +38,52 @@ document.addEventListener('keydown', function (e) {
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Building slider component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnsliderleft = document.querySelector('.slider__btn--left');
+const btnsliderright = document.querySelector('.slider__btn--right');
+let currentslide = 0;
+const maxslide = slides.length;
+
+// slider.style.transform = `scale(0.7)`;
+// slider.style.overflow = `visible`;
+
+// slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+// console.log(slides);
+
+const gotoslidefunc = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+
+gotoslidefunc(0);
+/// to go to next slide functionality
+const nextslide = function () {
+  if (currentslide === maxslide - 1) {
+    currentslide = 0;
+  } else {
+    currentslide++;
+  }
+  gotoslidefunc(currentslide);
+};
+
+const prevefunction = function () {
+  if (currentslide === 0) {
+    currentslide = maxslide - 1;
+  } else {
+    currentslide--;
+  }
+  gotoslidefunc(currentslide);
+};
+btnsliderright.addEventListener('click', nextslide);
+btnsliderleft.addEventListener('click', prevefunction);
+///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Building slider component↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️Lazy image↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️↗️
 
 const imgtarget = document.querySelectorAll('img[data-src]');
