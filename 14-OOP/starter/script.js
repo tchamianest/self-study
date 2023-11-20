@@ -1,6 +1,6 @@
 // 'use strict';
 
-// //create constructor function always use capital letter
+//create constructor function always use capital letter
 // const Person = function (name, birthyear, sex) {
 //   this.fullname = name;
 //   this.birthyear = birthyear;
@@ -10,9 +10,15 @@
 //   //   this.Calcage = function () {
 //   //     console.log(2023 - this.birthyear);
 //   //   };
+
 // };
 
 // const kalisa = new Person('kalisa daniel', 1998);
+
+// //HOW CAN CREATE STATIC VALIABLE
+// Person.hey=function(){
+//   console.log('hey there')
+// }
 
 // console.log(kalisa);
 // const Maligarita = new Person('maliga ', 1975);
@@ -80,54 +86,93 @@
 
 /// CODING CHALLENGE #9 LECTURE 14
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelerate = function () {
-  return (this.speed = this.speed + 10);
-};
-Car.prototype.brake = function () {
-  return (this.speed = this.speed - 5);
-};
+// Car.prototype.accelerate = function () {
+//   return (this.speed = this.speed + 10);
+// };
+// Car.prototype.brake = function () {
+//   return (this.speed = this.speed - 5);
+// };
 
-const car1 = new Car('BMW', 120);
-const car2 = new Car('Melcedecs', 95);
+// const car1 = new Car('BMW', 120);
+// const car2 = new Car('Melcedecs', 95);
 
-console.log(car1, car2);
-console.log(
-  `accererate 1;${car1.accelerate()}  accerarte 2:${car2.accelerate()}`
-);
-console.log(car1.brake(), car2.brake());
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
+// console.log(car1, car2);
+// console.log(
+//   `accererate 1;${car1.accelerate()}  accerarte 2:${car2.accelerate()}`
+// );
+// console.log(car1.brake(), car2.brake());
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////
 
-/// CLASS IN JAVASCRIPT
+// /// CLASS IN JAVASCRIPT
 
 class Person {
-  constructor(name, birthyear) {
-    this.name = name;
+  constructor(fullname, birthyear) {
+    this.fullname = fullname;
     this.birthyear = birthyear;
   }
+
+  /// INSTANCE METHODE
 
   calcAge() {
     console.log(2023 - this.birthyear);
   }
+  set fullname(nam) {
+    if (nam.includes(' ')) this._fullname = nam;
+    else alert(`the ${nam} is not afull name`);
+  }
+
+  get fullname() {
+    return this._fullname;
+  }
+
+  /// CREATE STATIC METHODE
+
+  static hey() {
+    console.log(' hey there kalisa daniel');
+  }
 }
 
-const bezaeva = new Person('Queen', 2004);
+Person.hey();
+const bezaeva = new Person('Queen beza', 2004);
+console.log(bezaeva);
 
 bezaeva.calcAge();
 
-/// or you can extend class using the prototype
+// /// or you can extend class using the prototype
 
-Person.prototype.salut = function () {
-  console.log(`Hey ${this.name} 😉`);
-};
-bezaeva.salut();
+// Person.prototype.salut = function () {
+//   console.log(`Hey ${this.name} 😉`);
+// };
+// bezaeva.salut();
 
-const ernest = new Person('kalisa erenst', 1999);
-ernest.salut();
-ernest.calcAge();
-console.log(ernest);
+// const ernest = new Person('kalisa erenst', 1999);
+// ernest.salut();
+// ernest.calcAge();
+// console.log(ernest);
+
+////  SETER AND GETER IN JS
+
+// const obje = {
+//   name: 'kalisa daniel',
+//   age: 21,
+//   move: [100, 211, 233, 2123, 21],
+
+//   get latest() {
+//     return this.move.slice(-1).pop();
+//   },
+//   set setter(mov) {
+//     return this.move.push(mov);
+//   },
+// };
+
+// console.log(obje.latest);
+// obje.setter = 1000;
+// console.log(typeof obje.setter);
+
+// console.log(obje);
