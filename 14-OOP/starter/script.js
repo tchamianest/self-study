@@ -111,38 +111,38 @@
 
 // /// CLASS IN JAVASCRIPT
 
-class Person {
-  constructor(fullname, birthyear) {
-    this.fullname = fullname;
-    this.birthyear = birthyear;
-  }
+// class Person {
+//   constructor(fullname, birthyear) {
+//     this.fullname = fullname;
+//     this.birthyear = birthyear;
+//   }
 
-  /// INSTANCE METHODE
+//   /// INSTANCE METHODE
 
-  calcAge() {
-    console.log(2023 - this.birthyear);
-  }
-  set fullname(nam) {
-    if (nam.includes(' ')) this._fullname = nam;
-    else alert(`the ${nam} is not afull name`);
-  }
+//   calcAge() {
+//     console.log(2023 - this.birthyear);
+//   }
+//   set fullname(nam) {
+//     if (nam.includes(' ')) this._fullname = nam;
+//     else alert(`the ${nam} is not afull name`);
+//   }
 
-  get fullname() {
-    return this._fullname;
-  }
+//   get fullname() {
+//     return this._fullname;
+//   }
 
-  /// CREATE STATIC METHODE
+//   /// CREATE STATIC METHODE
 
-  static hey() {
-    console.log(' hey there kalisa daniel');
-  }
-}
+//   static hey() {
+//     console.log(' hey there kalisa daniel');
+//   }
+// }
 
-Person.hey();
-const bezaeva = new Person('Queen beza', 2004);
-console.log(bezaeva);
+// Person.hey();
+// const bezaeva = new Person('Queen beza', 2004);
+// console.log(bezaeva);
 
-bezaeva.calcAge();
+// bezaeva.calcAge();
 
 // /// or you can extend class using the prototype
 
@@ -176,3 +176,254 @@ bezaeva.calcAge();
 // console.log(typeof obje.setter);
 
 // console.log(obje);
+
+///// HOW TO CREATE OBJECT PROGRAMATICAL
+
+// const PersonProt = {
+//   calcAge() {
+//     console.log(2023 - this.birthyear);
+//     return 2023 - this.birthyear;
+//   },
+
+/// we can also add the constructor insider for creating the things
+
+//   init(firstname, birthyear) {
+//     this.firstname = firstname;
+//     this.birthyear = birthyear;
+//   },
+// };
+
+// const steven = Object.create(PersonProt);
+// console.log(steven);
+
+// steven.name = 'kalisa daniel';
+// steven.birthyear = 1999;
+// steven.age = steven.calcAge();
+// console.log(steven);
+
+// ///create new user
+// const sarah = Object.create(PersonProt);
+// sarah.init('sarah mafene', 1787);
+// sarah.calcAge();
+
+// console.log(sarah);
+
+//// /////////////////////////////////////////////////////
+/////CODING CHALLENGE  NUMBE #2
+
+// class Carcl {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
+
+//   accelerate = function () {
+//     return (this.speed = this.speed + 10);
+//   };
+//   brake = function () {
+//     return (this.speed = this.speed - 5);
+//   };
+
+//   get speedup() {
+//     return (this.speed /= 1.6);
+//   }
+
+//   set speedup(speed) {
+//     return (this.speed = speed * 1.6);
+//   }
+// }
+// const ford = new Carcl('ford races', 120);
+// console.log(ford.speed);
+// ford.speedup;
+// console.log(ford.speed);
+// ford.speedup = 121;
+// console.log(ford);
+// ford.speedup;
+// console.log(ford);
+
+//// /////////////////////////////////////////////////////
+/////INHERTANCE BETWEEN CLASSES CONSTRUCTOR FUNCTION
+// const Person = function (firstname, birthyear) {
+//   this.birthyear = birthyear;
+//   this.firstname = firstname;
+// };
+
+// Person.prototype.calcage = function () {
+//   return 2023 - this.birthyear;
+// };
+
+// const Student = function (firstname, birthyear, course) {
+//   // this.firstname = firstname;
+//   // this.birthyear = birthyear;
+
+//   Person.call(this, firstname, birthyear);
+//   this.course = course;
+// };
+
+// // HOW TO MERG THE INHERTENCE
+// Student.prototype = Object.create(Person.prototype);
+
+// const Tchami = new Student(
+//   'Iradukunda Ernest',
+//   2000,
+//   'electronics and telecomunicatio'
+// );
+// console.log(Tchami);
+// console.log(Tchami.calcage());
+
+//// /////////////////////////////////////////////////////////////////
+/////CHALLENGE NUMBER #3
+
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+
+// // Car.prototype.accelerate = function () {
+// //   this.speed = this.speed + 20;
+// //   this.chargeTo = this.chargeTo - 1;
+// //   console.log();
+// // };
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+// EV.prototype = Object.create(Car.prototype);
+
+// EV.prototype.chargerbatter = function (chargeTo) {
+//   return (this.charge = chargeTo);
+// };
+
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} going at speed of${this.speed}Kmh with charge of${this.charge}`
+//   );
+// };
+// const Tesla = new EV('tesla', 120, 30);
+// console.log(Tesla);
+// Tesla.accelerate();
+
+//// /////////////////////////////////////////////////////////////////
+/////INHERITANCE BETWEEN CLASSES ES6 CLASSES
+
+// class Person {
+//   constructor(fullname, birthyear) {
+//     this.fullname = fullname;
+//     this.birthyear = birthyear;
+//   }
+
+//   /// INSTANCE METHODE
+
+//   calcAge() {
+//     console.log(2023 - this.birthyear);
+//   }
+//   set fullname(nam) {
+//     if (nam.includes(' ')) this._fullname = nam;
+//     else alert(`the ${nam} is not afull name`);
+//   }
+
+//   get fullname() {
+//     return this._fullname;
+//   }
+// }
+
+// class Student extends Person {
+//   constructor(fullname, birthyear, course) {
+//     super(fullname, birthyear);
+//     this.course = course;
+//   }
+//   introduce() {
+//     console.log(
+//       `My name is ${this._fullname} and i birn in ${this.birthyear} and i study ${this.course}`
+//     );
+//   }
+// }
+
+// const kalisa = new Student('kalisa daniel', 1999);
+// kalisa.calcAge();
+// kalisa.introduce();
+
+//// /////////////////////////////////////////////////////////////////
+/////INHERITANCE BETWEEN CLASSES ES6  Object.CREATE
+
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2023 - this.birthyear);
+//   },
+
+//   init(firstname, birthyear) {
+//     this.firstname = firstname;
+//     this.birthyear = birthyear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// //CHAINING THE PROTO
+
+// const StudentProt = Object.create(PersonProto);
+// StudentProt.init = function (firstname, birthyear, course) {
+//   PersonProto.init.call(this, firstname, birthyear);
+//   this.course = course;
+// };
+// const jay = Object.create(StudentProt);
+// jay.init('kalisa daniel', 1998, 'computer science');
+
+// console.log(jay);
+
+class Account {
+  constructor(owner, curency, pin) {
+    this.owner = owner;
+    this.curency = curency;
+
+    //simple privacy _
+    this._pin = pin;
+    this._movement = [];
+    this.locale = navigator.language;
+
+    console.log(`${owner} thank you for using this account in ${this.locale}`);
+  }
+
+  //create for access mov
+  getmovement() {
+    return this._movement;
+  }
+
+  ///PUBLIC INTERFACE
+
+  deposit(val) {
+    this._movement.push(val);
+  }
+
+  withdrwa(val) {
+    this.deposit(-val);
+  }
+
+  _approveloan() {
+    return true;
+  }
+
+  requestloan(val) {
+    if (this._approveloan) {
+      this.deposit(val);
+      console.log(`Loan of ${val} Approved`);
+    }
+  }
+}
+
+const acc1 = new Account('tchami', 'RWf', 1111111);
+
+//// istead of do this ude the profession way for creating methode
+// acc1.movement.push(100);
+// acc1.movement.push(-100);
+
+acc1.deposit(200);
+acc1.withdrwa(1000);
+
+acc1.requestloan(19000);
+
+console.log(acc1.getmovement());
+
+console.log(acc1);
