@@ -373,28 +373,133 @@
 
 // console.log(jay);
 
+// class Account {
+//   constructor(owner, curency, pin) {
+//     this.owner = owner;
+//     this.curency = curency;
+
+//     //simple privacy _
+//     this._pin = pin;
+//     this._movement = [];
+//     this.locale = navigator.language;
+
+//     console.log(`${owner} thank you for using this account in ${this.locale}`);
+//   }
+
+//   //create for access mov
+//   getmovement() {
+//     return this._movement;
+//   }
+
+//   ///PUBLIC INTERFACE
+
+//   deposit(val) {
+//     this._movement.push(val);
+//   }
+
+//   withdrwa(val) {
+//     this.deposit(-val);
+//   }
+
+//   _approveloan() {
+//     return true;
+//   }
+
+//   requestloan(val) {
+//     if (this._approveloan) {
+//       this.deposit(val);
+//       console.log(`Loan of ${val} Approved`);
+//     }
+//   }
+// }
+
+// const acc1 = new Account('tchami', 'RWf', 1111111);
+
+// //// istead of do this ude the profession way for creating methode
+// // acc1.movement.push(100);
+// // acc1.movement.push(-100);
+
+// acc1.deposit(200);
+// acc1.withdrwa(1000);
+
+// acc1.requestloan(19000);
+
+// console.log(acc1.getmovement());
+
+// console.log(acc1);
+
+//// to day preparation for interview
+
+// const removervoel = function (string) {
+//   const voel = 'iuoaeIUOAE';
+//   const answer = string
+//     .split('')
+//     .filter(el => voel.indexOf(el) === -1)
+//     .join('');
+//   console.log(answer);
+//   return answer;
+// };
+
+// removervoel('kalisa ernest');
+// console.log(Number.isInteger(-3.65));
+
+// //// repeating word
+
+// const repeatfnc = function (number, word) {
+//   //FIRST CHECK IF THE NUMBER IS INTERGER AND GRETER THAN ZERO
+
+//   if (Number.isInteger(number) && number > 0) {
+//     const repet = word.repeat(number, word);
+//     return repet;
+//   } else {
+//     console.log('check your input data if it is proper⚠️');
+//   }
+// };
+
+// console.log(repeatfnc(100, 'Tchami '));
+
+// const array2 = [100, 21, 34, 21, 43, 21, 142];
+
+// const checkarr = function (arr) {
+//   return Math.max(...arr);
+// };
+
+// console.log(checkarr(array2));
+
+// console.log(array2.__proto__);
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////ENCAPSULATION PRIVATE CLASSES FIELD AND METHODE
+
 class Account {
+  // PUBLIC FIELD
+  locale = navigator.language;
+  // _movement = [];
+
+  /// to make some thing private
+  #movement = [];
+
   constructor(owner, curency, pin) {
     this.owner = owner;
     this.curency = curency;
 
     //simple privacy _
     this._pin = pin;
-    this._movement = [];
-    this.locale = navigator.language;
+    // this._movement = [];
+    // this.locale = navigator.language;
 
     console.log(`${owner} thank you for using this account in ${this.locale}`);
   }
 
   //create for access mov
   getmovement() {
-    return this._movement;
+    return this.#movement;
   }
 
   ///PUBLIC INTERFACE
 
   deposit(val) {
-    this._movement.push(val);
+    this.#movement.push(val);
   }
 
   withdrwa(val) {
@@ -413,17 +518,12 @@ class Account {
   }
 }
 
-const acc1 = new Account('tchami', 'RWf', 1111111);
-
-//// istead of do this ude the profession way for creating methode
-// acc1.movement.push(100);
-// acc1.movement.push(-100);
-
-acc1.deposit(200);
-acc1.withdrwa(1000);
-
-acc1.requestloan(19000);
+const acc1 = new Account('kalisa ernest', 2000, 36655);
+acc1.deposit(1000);
+acc1.withdrwa(200);
 
 console.log(acc1.getmovement());
 
-console.log(acc1);
+// we can not console movement out siide becouse we set it to private #
+// console.log(acc1.#movement);
+console.log(acc1._pin);
