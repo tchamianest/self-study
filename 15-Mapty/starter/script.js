@@ -66,6 +66,7 @@ class App {
     this.#map.on('click', this._showForm.bind(this));
   }
 
+  /// thiss remov gidden on our form
   _showForm(mape) {
     this.#mapevent = mape;
     form.classList.remove('hidden');
