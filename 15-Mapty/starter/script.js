@@ -24,7 +24,7 @@ class App {
   constructor() {
     this._getPosition();
 
-    form.addEventListener('submit', this._newWorkout);
+    form.addEventListener('submit', this._newWorkout.bind(this));
 
     //////INPUT TYPE CHANGE FORM BASED
     inputType.addEventListener('change', function () {
@@ -38,7 +38,7 @@ class App {
   _getPosition() {
     if (navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
-        this._loadMApPositio,
+        this._loadMApPositio.bind(this),
         function () {
           const body = document.querySelector('body');
           body.style.color = 'black';
@@ -51,8 +51,8 @@ class App {
   _loadMApPositio(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(position.coords.latitude);
-    console.log(longitude, latitude);
+    // console.log(position.coords.latitude);
+    // console.log(longitude, latitude);
 
     const coard = [latitude, longitude];
 
@@ -61,16 +61,16 @@ class App {
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    }).addTo(this.#map);
 
-    this.#map.on('click', function (map) {
-      this.#mapevent = map;
-      form.classList.remove('hidden');
-      inputDistance.focus();
-    });
+    this.#map.on('click', this._showForm.bind(this));
   }
 
-  _showForm() {}
+  _showForm(mape) {
+    this.#mapevent = mape;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
 
   _toggleElevetionField() {}
 
@@ -85,10 +85,10 @@ class App {
         ' ';
 
     /// MAKER HERE
-    console.log(mapevent);
-    const { lat, lng } = mapevent.latlng;
+    console.log(this.#mapevent);
+    const { lat, lng } = this.#mapevent.latlng;
     L.marker([lat, lng])
-      .addTo(map)
+      .addTo(this.#map)
       .bindPopup(
         L.popup({
           maxWidth: 250,
