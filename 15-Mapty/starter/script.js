@@ -18,6 +18,47 @@ let map, mapevent;
 ///GETING MY LATITUDE AND LONGITUDE
 
 /// CLASS OF WOLL APP
+class workout {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+  constructor(coard, distance, duration) {
+    this.coard = coard; //[LAT,LONG]
+    this.distance = distance;
+    this.duration = duration;
+  }
+}
+
+class Runnning extends workout {
+  constructor(coard, distance, duration, cadence) {
+    super(coard, distance, duration);
+    this.cadence = cadence;
+    this.calcpace();
+  }
+
+  calcpace() {
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+class ciclering extends workout {
+  constructor(coard, distance, duration, elevationgain) {
+    super(coard, distance, duration);
+    this.elevationgain = elevationgain;
+    this.calcspeed();
+  }
+
+  calcspeed() {
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+const cilc1 = new ciclering([123, 32], 212, 30, 21);
+const cilc2 = new Runnning([123, 32], 212, 30, 21);
+console.log(cilc1, cilc2);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////APPLICATION ARCHTECTURE
 class App {
   #map;
   #mapevent;
@@ -77,6 +118,46 @@ class App {
 
   _newWorkout(e) {
     e.preventDefault();
+
+    //GET data from form
+
+    const type = inputType.value;
+    console.log(`type is :${type}`);
+
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+
+    //Check if data is valid
+
+    //if workout running ,create running object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+
+      //check if input is valied
+
+      if (
+        !Number.isFinite(distance) &&
+        !Number.isFinite(duration) &&
+        !Number.isFinite(cadence)
+      )
+        return alert('input must be postive number');
+    }
+    //if workout cycling ,create cycling object
+
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+      if (
+        !Number.isFinite(distance) &&
+        !Number.isFinite(duration) &&
+        !Number.isFinite(elevation)
+      )
+        return alert('input must be postive number');
+    }
+    //add new work out on map as maker
+
+    // render workout on list
+
+    // Hide form clear input field and
 
     //CLEAR ALL INPUT AFTER SUBMISION
     inputCadence.value =
