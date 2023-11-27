@@ -122,13 +122,16 @@ class App {
     //GET data from form
 
     const type = inputType.value;
-    console.log(`type is :${type}`);
 
     const distance = +inputDistance.value;
     const duration = +inputDuration.value;
 
     //Check if data is valid
 
+    const validInputs = (...inputs) =>
+      inputs.every(inp => Number.isFinite(inp));
+
+    const allPostive = (...inputs) => inputs.every(inp => inp > 0);
     //if workout running ,create running object
     if (type === 'running') {
       const cadence = +inputCadence.value;
@@ -136,9 +139,12 @@ class App {
       //check if input is valied
 
       if (
-        !Number.isFinite(distance) &&
-        !Number.isFinite(duration) &&
-        !Number.isFinite(cadence)
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+
+        !validInputs(distance, duration, cadence) ||
+        !allPostive(distance, duration, cadence)
       )
         return alert('input must be postive number');
     }
@@ -147,9 +153,8 @@ class App {
     if (type === 'cycling') {
       const elevation = +inputElevation.value;
       if (
-        !Number.isFinite(distance) &&
-        !Number.isFinite(duration) &&
-        !Number.isFinite(elevation)
+        !validInputs(distance, duration, elevation) ||
+        !allPostive(distance, duration)
       )
         return alert('input must be postive number');
     }
