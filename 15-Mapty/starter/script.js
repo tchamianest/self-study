@@ -73,7 +73,14 @@ class App {
   #mapevent;
   #workouts = [];
   constructor() {
+    // start take position
     this._getPosition();
+
+    //GET DATA FROM LOCAR STORAGE
+
+    this._getFromlocarsto();
+
+    //ADDEVENT LISTERNER
 
     form.addEventListener('submit', this._newWorkout.bind(this));
     containerWorkouts.addEventListener('click', this._movetomap.bind(this));
@@ -116,6 +123,11 @@ class App {
     }).addTo(this.#map);
 
     this.#map.on('click', this._showForm.bind(this));
+
+    //render from locar storage
+    this.#workouts.forEach(work => {
+      this._Renderworkout(work);
+    });
   }
 
   /// thiss remov gidden on our form
@@ -199,6 +211,9 @@ class App {
 
     //render on the list work out
     this._Renderworkouthml(workout);
+
+    //SET LOCAL STORAGE
+    this._setLOcalstorage();
   }
 
   /// rendeling
@@ -284,6 +299,22 @@ class App {
         duration: 1,
       },
     });
+  }
+  _setLOcalstorage() {
+    localStorage.setItem('workout', JSON.stringify(this.#workouts));
+  }
+  _getFromlocarsto() {
+    const datfromlocar = JSON.parse(localStorage.getItem('workout'));
+    this.#workouts = datfromlocar;
+
+    this.#workouts.forEach(work => {
+      this._Renderworkouthml(work);
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('workout');
+    location.reload();
   }
 }
 const app = new App();
