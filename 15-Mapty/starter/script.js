@@ -235,6 +235,7 @@ class App {
       .openPopup();
   }
 
+  ///// renderwork out
   _Renderworkouthml(workout) {
     let html = `
      <li class="workout workout--${workout.type}" data-id="${workout.id}">
@@ -268,6 +269,7 @@ class App {
         `;
     }
 
+    //// condition for cycling
     if (workout.type === 'cycling') {
       html += `
          <div class="workout__details">
