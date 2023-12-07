@@ -4,19 +4,21 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
-const request = new XMLHttpRequest();
 
 ///way for get request
-request.open('Get', 'https://restcountries.com/v3.1/name/Rwanda');
 
-//we send  to the server
-request.send();
+const getcountry = function (countrie) {
+  const request = new XMLHttpRequest();
+  request.open('Get', `https://restcountries.com/v3.1/name/${countrie}`);
 
-request.addEventListener('load', function () {
-  const [data] = JSON.parse(this.responseText);
-  console.log(data);
+  //we send  to the server
+  request.send();
 
-  const html = `
+  request.addEventListener('load', function () {
+    const [data] = JSON.parse(this.responseText);
+    console.log(data);
+
+    const html = `
         <article class="country">
           <img class="country__img" src="${data.flags.svg}" />
           <div class="country__data">
@@ -25,13 +27,16 @@ request.addEventListener('load', function () {
             <p class="country__row"><span>👫</span>${(
               +data.population / 1000000
             ).toFixed(1)}M Population</p>
-            <p class="country__row"><span>🗣️</span>${data.languages.kin}</p>
-            <p class="country__row"><span>💰</span>${
-              data.currencies.RWF.name
-            }</p>
+            <p class="country__row"><span>🗣️</span>${data.languages.eng}</p>
+            <p class="country__row"><span>💰</span>${data.fifa}</p>
           </div>
         </article>
   `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-});
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+  });
+};
+getcountry('rwanda');
+getcountry('usa');
+getcountry('canada');
+getcountry('germany');
