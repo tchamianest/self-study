@@ -22,12 +22,12 @@ const countryRender = function (data, classadd = '') {
         </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
 const rendererro = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
 ///END OF RENDERING///////////////////////////////////////////////////////////////////
@@ -171,37 +171,63 @@ const getJSON = function (url, errorMsg = '') {
 };
 
 ///////////////
-const getdatafrom = function (country) {
-  getJSON(
-    `https://restcountries.com/v3.1/name/${country}`,
-    'the country not found '
-  )
+// const getdatafrom = function (country) {
+//   getJSON(
+//     `https://restcountries.com/v3.1/name/${country}`,
+//     'the country not found '
+//   )
+//     .then(data => {
+//       countryRender(data[0]);
+
+//       const neighbour = data[0].borders[0];
+//       // console.log(neighbour);
+//       if (!neighbour) throw new Error('there is no neighbour');
+
+//       //COUNTRY 2
+//       return getJSON(
+//         `https://restcountries.com/v3.1/alpha/${neighbour}`,
+//         'Neighbour Country not found'
+//       );
+//     })
+//     .then(data => countryRender(data[0], 'neighbour'))
+//     .catch(erro => {
+//       console.log(erro);
+//       rendererro(`the error happen 😉😉
+//        ${erro.message} Try Again !`);
+//     })
+//     .finally(() => {
+//       ///use finally for things happens any time if we met erro or when success
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+// btn.addEventListener('click', function () {
+//   let like = inputfiel.value;
+//   getdatafrom(like);
+//   countriesContainer.textContent = '';
+// });
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///// first coding CHALLENGE
+
+const whereAmI = function (lat, long) {
+  fetch(`https://geocode.xyz/${lat},${long}?geoit=json`)
+    .then(res => {
+      if (!res.ok) throw new Error('proble to fetch');
+      return res.json();
+    })
     .then(data => {
-      countryRender(data[0]);
-
-      const neighbour = data[0].borders[0];
-      // console.log(neighbour);
-      if (!neighbour) throw new Error('there is no neighbour');
-
-      //COUNTRY 2
-      return getJSON(
-        `https://restcountries.com/v3.1/alpha/${neighbour}`,
-        'Neighbour Country not found'
-      );
+      console.log(data);
+      console.log(data.country);
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
     })
-    .then(data => countryRender(data[0], 'neighbour'))
+    .then(res => {
+      if (!res.ok) throw new Error('Country not found');
+      return res.json();
+    })
+    .then(data => countryRender(data[0]))
     .catch(erro => {
-      console.log(erro);
-      rendererro(`the error happen 😉😉
-       ${erro.message} Try Again !`);
-    })
-    .finally(() => {
-      ///use finally for things happens any time if we met erro or when success
-      countriesContainer.style.opacity = 1;
+      console.log(`the error happening 💥${erro}`);
     });
 };
-btn.addEventListener('click', function () {
-  let like = inputfiel.value;
-  getdatafrom(like);
-  countriesContainer.textContent = '';
-});
+
+whereAmI(52.508, 13.381);
