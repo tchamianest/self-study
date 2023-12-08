@@ -61,6 +61,7 @@ const countryRender = function (data, classadd = '') {
   countriesContainer.style.opacity = 1;
 };
 
+/*
 const getcountryNeigbour = function (countrie) {
   const request1 = new XMLHttpRequest();
   request1.open('Get', `https://restcountries.com/v3.1/name/${countrie}`);
@@ -93,3 +94,42 @@ const getcountryNeigbour = function (countrie) {
   });
 };
 getcountryNeigbour('usa');
+*/
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////// UNSING PROMISES TO FETCH OUR DATA
+
+// const getdatafrom = function (country) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+
+//       //also this json is Asynchrouns function we have to return it
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       countryRender(data[0]);
+//     });
+// };
+
+/// simple way with arrow function
+const getdatafrom = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      countryRender(data[0]);
+      console.log(data[0]);
+
+      const neighbour = data[0].borders[0];
+      // console.log(neighbour);
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data);
+      countryRender(data[0], 'neighbour');
+    });
+};
+
+getdatafrom('rwanda');
