@@ -2,6 +2,7 @@
 
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
+const inputfiel = document.querySelector('.input');
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ////RENDERING
@@ -124,6 +125,10 @@ getcountryNeigbour('usa');
 // };
 
 /// simple way with arrow function
+
+///CRETE FUNCTION FOR THE METHODE FOR THE THEN ERROR
+
+/*
 const getdatafrom = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(response => {
@@ -154,10 +159,49 @@ const getdatafrom = function (country) {
       ///use finally for things happens any time if we met erro or when success
       countriesContainer.style.opacity = 1;
     });
+};*/
+
+/////////////////////////////////////////////////////////////////////////////////////////
+///// factorlise
+const getJSON = function (url, errorMsg = '') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} ${response.status}`);
+    return response.json();
+  });
 };
 
+///////////////
+const getdatafrom = function (country) {
+  getJSON(
+    `https://restcountries.com/v3.1/name/${country}`,
+    'the country not found '
+  )
+    .then(data => {
+      countryRender(data[0]);
+
+      const neighbour = data[0].borders[0];
+      // console.log(neighbour);
+      if (!neighbour) throw new Error('there is no neighbour');
+
+      //COUNTRY 2
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        'Neighbour Country not found'
+      );
+    })
+    .then(data => countryRender(data[0], 'neighbour'))
+    .catch(erro => {
+      console.log(erro);
+      rendererro(`the error happen 😉😉
+       ${erro.message} Try Again !`);
+    })
+    .finally(() => {
+      ///use finally for things happens any time if we met erro or when success
+      countriesContainer.style.opacity = 1;
+    });
+};
 btn.addEventListener('click', function () {
-  getdatafrom('rwanda');
+  let like = inputfiel.value;
+  getdatafrom(like);
   countriesContainer.textContent = '';
 });
-getdatafrom('hdfjsdh');
