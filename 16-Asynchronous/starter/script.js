@@ -209,28 +209,28 @@ const getJSON = function (url, errorMsg = '') {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///// first coding CHALLENGE
 
-const whereAmI = function (lat, long) {
-  fetch(`https://geocode.xyz/${lat},${long}?geoit=json`)
-    .then(res => {
-      if (!res.ok) throw new Error('proble to fetch');
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      console.log(data.country);
-      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Country not found');
-      return res.json();
-    })
-    .then(data => countryRender(data[0]))
-    .catch(erro => {
-      console.log(`the error happening 💥${erro}`);
-    });
-};
+// const whereAmI = function (lat, long) {
+//   fetch(`https://geocode.xyz/${lat},${long}?geoit=json`)
+//     .then(res => {
+//       if (!res.ok) throw new Error('proble to fetch');
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(data.country);
+//       return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error('Country not found');
+//       return res.json();
+//     })
+//     .then(data => countryRender(data[0]))
+//     .catch(erro => {
+//       console.log(`the error happening 💥${erro}`);
+//     });
+// };
 
-whereAmI(52.508, 13.381);
+// whereAmI(52.508, 13.381);
 
 //////COMPARISON FOR MICRO TASK QUEUE TO CALL-BACK HELL QUEUE
 
@@ -277,19 +277,70 @@ lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
 
 ////new way
 
-const wait = function (second) {
-  return new Promise(resolve => {
-    setTimeout(resolve, second * 1000);
+// const wait = function (second) {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, second * 1000);
+//   });
+// };
+
+// //// this ican also replace the call back hell
+
+// wait(2)
+//   .then(data => {
+//     console.log('you wait 2 second');
+//     return wait(1);
+//   })
+//   .then(res => {
+//     console.log('you wait 1 second after 2');
+//     return wait(3);
+//   })
+//   .then(ter => console.log('you wait three after four'));
+
+//// GET CURENT LOCATION WITH AWAIT
+
+const getpotionpromise = function () {
+  return new Promise((resolve, reject) => {
+    // navigator.geolocation.getCurrentPosition(
+    //   function (posi) {
+    //     resolve(posi);
+    //   },
+    //   function (err) {
+    //     reject(err);
+    //   }
+
+    //use simple methode
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
 
-wait(2)
-  .then(data => {
-    console.log('you wait 2 second');
-    return wait(1);
-  })
-  .then(res => {
-    console.log('you wait 1 second after 2');
-    return wait(3);
-  })
-  .then(ter => console.log('you wait three after four'));
+// getpotionpromise().then(data => console.log(data));
+
+////// put where im to next lever
+
+const whereAmI = function () {
+  getpotionpromise()
+    .then(posi => {
+      const { latitude: lat, longitude: long } = posi.coords;
+      return fetch(`https://geocode.xyz/${lat},${long}?geoit=json`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('proble to fetch');
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(data.country);
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Country not found');
+      return res.json();
+    })
+    .then(data => countryRender(data[0]))
+    .catch(erro => {
+      console.log(`the error happening 💥${erro}`);
+    });
+};
+
+btn.addEventListener('click', whereAmI);
