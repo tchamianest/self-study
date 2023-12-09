@@ -298,49 +298,99 @@ lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
 
 //// GET CURENT LOCATION WITH AWAIT
 
-const getpotionpromise = function () {
-  return new Promise((resolve, reject) => {
-    // navigator.geolocation.getCurrentPosition(
-    //   function (posi) {
-    //     resolve(posi);
-    //   },
-    //   function (err) {
-    //     reject(err);
-    //   }
+// const getpotionpromise = function () {
+//   return new Promise((resolve, reject) => {
+//     // navigator.geolocation.getCurrentPosition(
+//     //   function (posi) {
+//     //     resolve(posi);
+//     //   },
+//     //   function (err) {
+//     //     reject(err);
+//     //   }
 
-    //use simple methode
-    // );
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+//     //use simple methode
+//     // );
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// // getpotionpromise().then(data => console.log(data));
+
+// ////// put where im to next lever
+
+// const whereAmI = function () {
+//   getpotionpromise()
+//     .then(posi => {
+//       const { latitude: lat, longitude: long } = posi.coords;
+//       return fetch(`https://geocode.xyz/${lat},${long}?geoit=json`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error('proble to fetch');
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(data.country);
+//       return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error('Country not found');
+//       return res.json();
+//     })
+//     .then(data => countryRender(data[0]))
+//     .catch(erro => {
+//       console.log(`the error happening 💥${erro}`);
+//     });
+// };
+
+// btn.addEventListener('click', whereAmI);
+
+/////CHALLENGE 2////////////////////////////////////////////////////
+const wait = function (second) {
+  return new Promise(resolve => {
+    setTimeout(resolve, second * 1000);
   });
 };
 
-// getpotionpromise().then(data => console.log(data));
+const imgcontainer = document.querySelector('.images');
 
-////// put where im to next lever
+const createImage = function (imagepth) {
+  return new Promise(function (resolve, reject) {
+    const image = document.createElement('img');
+    image.src = imagepth;
 
-const whereAmI = function () {
-  getpotionpromise()
-    .then(posi => {
-      const { latitude: lat, longitude: long } = posi.coords;
-      return fetch(`https://geocode.xyz/${lat},${long}?geoit=json`);
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('proble to fetch');
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      console.log(data.country);
-      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Country not found');
-      return res.json();
-    })
-    .then(data => countryRender(data[0]))
-    .catch(erro => {
-      console.log(`the error happening 💥${erro}`);
+    image.addEventListener('load', function () {
+      imgcontainer.append(image);
+      resolve(image);
     });
+
+    image.addEventListener('error', function () {
+      reject(new Error('there  is no image fromthat path'));
+    });
+  });
 };
 
-btn.addEventListener('click', whereAmI);
+// globar variable for hide
+let currentimag;
+createImage('img/img-1.jpg')
+  .then(data => {
+    currentimag = data;
+    return wait(3);
+  })
+  .then(() => {
+    currentimag.style.display = 'none';
+  })
+  .then(() => {
+    return wait(2);
+  })
+  .then(() => {
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    currentimag = img;
+    return wait(2);
+  })
+  .then(data => {
+    currentimag.style.display = 'none';
+  })
+  .catch(erro => console.log(erro));
