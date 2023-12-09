@@ -231,3 +231,65 @@ const whereAmI = function (lat, long) {
 };
 
 whereAmI(52.508, 13.381);
+
+//////COMPARISON FOR MICRO TASK QUEUE TO CALL-BACK HELL QUEUE
+
+// console.log('test for faster');
+// setTimeout(() => console.log('timer of zero sec'), 0);
+// Promise.resolve('kalisa daniel yakamejeje').then(res => {
+//   for (let i = 0; i < 10000000000; i++) {}
+//   console.log(res);
+// });
+
+// console.log('ariko urasetsa');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////BUILDING A SIMPLE PROMISE
+
+///EX1
+/*
+const lotteryGame = new Promise(function (resolve, reject) {
+  if (Math.random() > 0.5) {
+    resolve('You win 👌👌');
+  } else {
+    reject('you lost 😂😂');
+  }
+});
+
+lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
+*/
+
+//EX2
+
+// const lotteryGame = new Promise(function (resolve, reject) {
+//   console.log('lottery loading');
+
+//   setTimeout(function () {
+//     if (Math.random() > 0.5) {
+//       resolve('You win 👌👌');
+//     } else {
+//       reject(new Error('you lost 😂😂'));
+//     }
+//   }, 2000);
+// });
+
+// lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
+
+////new way
+
+const wait = function (second) {
+  return new Promise(resolve => {
+    setTimeout(resolve, second * 1000);
+  });
+};
+
+wait(2)
+  .then(data => {
+    console.log('you wait 2 second');
+    return wait(1);
+  })
+  .then(res => {
+    console.log('you wait 1 second after 2');
+    return wait(3);
+  })
+  .then(ter => console.log('you wait three after four'));
