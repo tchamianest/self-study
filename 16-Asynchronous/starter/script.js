@@ -400,13 +400,21 @@ lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
 
 const whereIam = async function (country) {
   ///fetch info from country API
-  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
 
-  ////extract the info we receive into json form
-  const final = await res.json();
-  console.log(final);
+  // WE HANDLE ERROR WITH TRY AND CATCH
 
-  //// after we have to render it
-  countryRender(final[0]);
+  try {
+    const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+    if (!res.ok) throw new Error('there is something bad happen 💀');
+
+    ////extract the info we receive into json form
+    const final = await res.json();
+    console.log(final);
+
+    //// after we have to render it
+    countryRender(final[0]);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 whereIam('rwanda');
