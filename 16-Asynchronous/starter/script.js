@@ -346,51 +346,67 @@ lotteryGame.then(dataa => console.log(dataa)).catch(err => console.error(err));
 // btn.addEventListener('click', whereAmI);
 
 /////CHALLENGE 2////////////////////////////////////////////////////
-const wait = function (second) {
-  return new Promise(resolve => {
-    setTimeout(resolve, second * 1000);
-  });
+// const wait = function (second) {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, second * 1000);
+//   });
+// };
+
+// const imgcontainer = document.querySelector('.images');
+
+// const createImage = function (imagepth) {
+//   return new Promise(function (resolve, reject) {
+//     const image = document.createElement('img');
+//     image.src = imagepth;
+
+//     image.addEventListener('load', function () {
+//       imgcontainer.append(image);
+//       resolve(image);
+//     });
+
+//     image.addEventListener('error', function () {
+//       reject(new Error('there  is no image fromthat path'));
+//     });
+//   });
+// };
+
+// // globar variable for hide
+// let currentimag;
+// createImage('img/img-1.jpg')
+//   .then(data => {
+//     currentimag = data;
+//     return wait(3);
+//   })
+//   .then(() => {
+//     currentimag.style.display = 'none';
+//   })
+//   .then(() => {
+//     return wait(2);
+//   })
+//   .then(() => {
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentimag = img;
+//     return wait(2);
+//   })
+//   .then(data => {
+//     currentimag.style.display = 'none';
+//   })
+//   .catch(erro => console.log(erro));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// SINK AWAIT this no need for all the then
+
+const whereIam = async function (country) {
+  ///fetch info from country API
+  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+
+  ////extract the info we receive into json form
+  const final = await res.json();
+  console.log(final);
+
+  //// after we have to render it
+  countryRender(final[0]);
 };
-
-const imgcontainer = document.querySelector('.images');
-
-const createImage = function (imagepth) {
-  return new Promise(function (resolve, reject) {
-    const image = document.createElement('img');
-    image.src = imagepth;
-
-    image.addEventListener('load', function () {
-      imgcontainer.append(image);
-      resolve(image);
-    });
-
-    image.addEventListener('error', function () {
-      reject(new Error('there  is no image fromthat path'));
-    });
-  });
-};
-
-// globar variable for hide
-let currentimag;
-createImage('img/img-1.jpg')
-  .then(data => {
-    currentimag = data;
-    return wait(3);
-  })
-  .then(() => {
-    currentimag.style.display = 'none';
-  })
-  .then(() => {
-    return wait(2);
-  })
-  .then(() => {
-    return createImage('img/img-2.jpg');
-  })
-  .then(img => {
-    currentimag = img;
-    return wait(2);
-  })
-  .then(data => {
-    currentimag.style.display = 'none';
-  })
-  .catch(erro => console.log(erro));
+whereIam('rwanda');
